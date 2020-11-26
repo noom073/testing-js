@@ -1,0 +1,64 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<style>
+		ul {
+			list-style-type: none;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="main"></div>
+	<script>
+		let array = [
+			{"id": 1, "name": "Motor", "parent": 0},
+			{"id": 2, "name": "Car", "parent": 1},
+			{"id": 3, "name": "MotorCycle", "parent": 1},
+			{"id": 4, "name": "Bike", "parent": 1},
+			{"id": 5, "name": "Nissan", "parent": 2},
+			{"id": 6, "name": "Toyota", "parent": 2},
+			{"id": 7, "name": "Isuzu", "parent": 2},
+			{"id": 8, "name": "Yamaha", "parent": 3},
+			{"id": 9, "name": "Honda", "parent": 3},
+			{"id": 10, "name": "Turbo", "parent": 4}
+		];
+		
+		let gentree = (arrays, parentID = 0) => {
+			let items = arrays.filter( r => r.parent === parentID)
+				.map( item => {
+					console.log(item.id);
+					let child = gentree(arrays, item.id);
+					if(child.length) {
+						item.child = child;
+					}
+					return item;
+				});			
+			return items;
+		};
+		
+		tree = gentree(array);
+		
+		let genHtml = (treeArray, num = '') => {
+			let html = '<ul>';			
+			treeArray.forEach( (r, index) => {	
+				let ahead = num === '' ? '' : num+'.';
+				let label = ahead + (+index +1);
+				if(r.child) {
+					html += '<li>'+ label +'. '+ r.name + genHtml(r.child, label) +'</li>';				
+				} else {
+					html += '<li>'+ label +'. '+ r.name +'</li>';				
+				}				
+			});
+			html += '</ul>';			
+			return html;
+		};
+		
+		let th = genHtml(tree);		
+		console.log(th);
+		main = document.querySelector("#main");
+		main.innerHTML = th;
+		
+	</script>
+</body>
+</html>

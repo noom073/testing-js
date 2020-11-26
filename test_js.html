@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .d-none {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="parent">
+        <div class="c-a">
+            <div class="trg">open</div>
+            <div class="c-b d-none">AAA-1</div>
+        </div>
+        <div class="c-a">
+            <div class="trg">open</div>
+            <div class="c-b d-none">AAA-2</div>
+        </div>
+    </div>
+
+    <script>
+        let a = document.querySelectorAll('.trg');
+        // console.log(a);
+        a.forEach(function(el) {
+            el.onclick = () => {
+                console.log(el);
+                setTimeout(() => {
+                    el.nextElementSibling.classList.toggle('d-none');
+                }, 100);
+            };
+        });
+    </script>
+</body>
+
+</html>
