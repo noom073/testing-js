@@ -25,16 +25,27 @@
     </div>
 
     <script>
-        let a = document.querySelectorAll('.trg');
-        // console.log(a);
-        a.forEach(function(el) {
-            el.onclick = () => {
-                console.log(el);
+        // exam1
+        let a = document.getElementsByClassName('trg');
+        for (const trg of a) {
+            console.log(trg);
+            trg.onclick = () => {
                 setTimeout(() => {
-                    el.nextElementSibling.classList.toggle('d-none');
+                    trg.nextElementSibling.classList.toggle('d-none');
                 }, 100);
             };
-        });
+        }
+
+        // exam2
+        // let a = document.querySelectorAll('.trg');
+        // a.forEach(function(el) {
+        //     el.onclick = () => {
+        //         console.log(el);
+        //         setTimeout(() => {
+        //             el.nextElementSibling.classList.toggle('d-none');
+        //         }, 100);
+        //     };
+        // });
     </script>
 </body>
 
