@@ -1,0 +1,42 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+	</head>
+<body>
+	<div id="main"></div>
+</body>
+<script>
+	let obj = {
+		a: 'A', 
+		b: 'B', 
+		c: { 
+			aa: 'AA', 
+			bb: 'BB', 
+			cc: {
+				xx: 'XX', 
+				yy: 'YY', 
+				G: {
+					H: 'HH', 
+					J: 'JJ'
+				}
+			}
+		}, 
+		d: 'DD' 
+	};
+		
+	let objFunc = (object) => {
+		let val = '';
+		for(r in object) {
+			if(typeof object[r] !== 'object') {				
+				val = object[r];
+				console.log(val);
+			} else {
+				objFunc(object[r]);
+			}
+		}
+	};
+	objFunc(obj);
+	
+	
+</script>
+</html>

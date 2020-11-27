@@ -1,0 +1,97 @@
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<style>
+		ul {
+			list-style-type: none;
+		}
+
+		.d-none {
+			display: none;
+		}
+
+		.d-active {
+			display: block;
+		}
+
+		.has-child {
+			cursor: pointer;
+		}
+
+		.caret::before {
+			content: '+ ';
+		}
+
+		.caret-down::before {
+			content: '- ';
+		}
+	</style>
+</head>
+
+<body>
+	<div id="main"></div>
+	<script>
+		let array = [
+			{ "id": 1, "name": "Motor", "parent": 0 },
+			{ "id": 2, "name": "Car", "parent": 1 },
+			{ "id": 3, "name": "MotorCycle", "parent": 1 },
+			{ "id": 4, "name": "Bike", "parent": 1 },
+			{ "id": 5, "name": "Nissan", "parent": 2 },
+			{ "id": 6, "name": "Toyota", "parent": 2 },
+			{ "id": 7, "name": "Isuzu", "parent": 2 },
+			{ "id": 8, "name": "Yamaha", "parent": 3 },
+			{ "id": 9, "name": "Honda", "parent": 3 },
+			{ "id": 10, "name": "Turbo", "parent": 4 },
+			{ "id": 11, "name": "Computer", "parent": 0 },
+			{ "id": 12, "name": "Navara", "parent": 5 }
+		];
+
+		let gentree = (arrays, parentID = 0) => {
+			let items = arrays.filter(r => r.parent === parentID)
+				.map(item => {
+					console.log(item.id);
+					let child = gentree(arrays, item.id);
+					if (child.length) {
+						item.child = child;
+					}
+					return item;
+				});
+			return items;
+		};
+
+		let tree = gentree(array);
+		let genHtml = (treeArray, num = '', display = '') => {
+			let classDisplay = display === '' ? 'd-active' : 'd-none';
+			let html = '<ul class="dropdown ' + classDisplay + '">';
+			treeArray.forEach((r, index) => {
+				let ahead = num === '' ? '' : num + '.';
+				let label = ahead + (+index + 1);
+				if (r.child) {
+					html += `<li><span class="has-child caret">${label} ${r.name}</span> ${genHtml(r.child, label, 'none')}</li>`;
+				} else {
+					html += '<li>' + label + ' ' + r.name + '</li>';
+				}
+			});
+			html += '</ul>';
+			return html;
+		};
+
+		let th = genHtml(tree);
+		main = document.querySelector("#main");
+		main.innerHTML = th;
+
+		var toggler = document.getElementsByClassName("has-child");
+		var i;
+		for (i = 0; i < toggler.length; i++) {
+			toggler[i].addEventListener("click", function () {
+				console.log(this.parentElement);
+				this.parentElement.querySelector(".dropdown").classList.toggle("d-active");
+				this.classList.toggle("caret-down");
+			});
+		}
+
+	</script>
+</body>
+
+</html>
