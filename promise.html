@@ -9,7 +9,8 @@
 
 <body>
     <div style="text-align: center;">
-        <h1 id="el1" style="margin-top: 5em;color:crimson; font-size: 3em;"></h1>
+        <img id="img-a" src="" width="350" height="200" alt="" style="margin-top: 5em;">
+        <h1 id="el1" style="color:crimson; font-size: 3em;"></h1>
 
     </div>
     <script>
@@ -168,10 +169,28 @@
                 'Junko');
             // let arr2 = arr.reverse();
             let div = document.getElementById("el1");
+            let img = document.getElementById("img-a");
+            // let setImage = (src) => { // USER IMAGE
+            //     return new Promise((res, rej) => {
+            //         img.src = src;
+            //         img.onload = () => res(src);
+            //         img.onerror = () => rej(new Error(`Have problem: ${src}`));
+            //     });
+            // };
             let elementFetch = (array, ms) => {
                 return new Promise((res, rej) => {
-                    setTimeout(() => {
+                    setTimeout(async () => {
                         console.log(array);
+                        let src = `https://fakeimg.pl/350x200/?text=${array}`;
+                        // let setMyImage = setImage(src); // USER IMAGE
+                        // setMyImage.then(
+                        //     src => {
+                        //         div.innerText = array;
+                        //         console.log('img complete', src);
+                        //         res();
+                        //     },
+                        //     error => console.error(error)
+                        // );
                         div.innerText = array;
                         res();
                     }, ms);
@@ -183,15 +202,26 @@
                 if (index < array.length) {
                     return fet(array, index, ms);
                 }
-            };
+            };            
             let run = async () => {
-                await fet(arr, 0, 50);
-                arr.reverse();
-                await fet(arr, 0, 100);
-                arr.reverse();
-                await fet(arr, 0, 150);
-                arr.reverse();
-                await fet(arr, 0, 200);
+                fet(arr, 0, 50).then(res => {
+                    arr.reverse();
+                    return fet(arr, 0, 100);
+                }).then(res => {
+                    arr.reverse();
+                    return fet(arr, 0, 150);
+                }).then(res => {
+                    arr.reverse();
+                    return fet(arr, 0, 200);
+                });
+                // LIVE ABOVE
+                // await fet(arr, 0, 50);
+                // arr.reverse();
+                // await fet(arr, 0, 100);
+                // arr.reverse();
+                // await fet(arr, 0, 150);
+                // arr.reverse();
+                // await fet(arr, 0, 200);
             };
             run();
         });
