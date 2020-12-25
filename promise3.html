@@ -23,27 +23,21 @@
                 });
             };
 
-            const fetch = async(array, index, ms) => {
-                let data = await prom(array[index], ms);
-                console.log(data, index);
+            const fet = async (text, ms) => {
+                let data = await prom(text, ms);
                 div.innerText = data;
-                index++;
-                if (index < array.length) {
-                    return fetch(array, index, ms);
-                }
+                return data;
             };
 
-            let array = new Array();
-            for (let index = 0; index < 5; index++) {
-                array.push(index + 1);
-            }
-
-            let run = fetch(array, 0, 100);
-            run.then(() => {
-                return fetch(array, 0, 200);
-            }).then(() => {
-                return fetch(array, 0, 700);
+            fet('A1', 1000).then(data=>{
+                return data;
+            }).then(async data=>{
+                let text = data+'A2';
+                return await fet(text, 2000);
+            }).then(data=>{
+                console.log(data);
             });
+
         });
     </script>
 </body>
