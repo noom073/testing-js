@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div style="text-align: center;">
+        <h1 id="elem1" style="color: crimson; margin-top: 2em; font-size: 5em;"></h1>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const div = document.getElementById("elem1");
+            const prom = (data, ms) => {
+                return new Promise((res, rej) => {
+                    setTimeout(() => {
+                        res(data);
+                    }, ms);
+                });
+            };
+
+            const fetch = async(array, index, ms) => {
+                let data = await prom(array[index], ms);
+                console.log(data, index);
+                div.innerText = data;
+                index++;
+                if (index < array.length) {
+                    return fetch(array, index, ms);
+                }
+            };
+
+            let array = new Array();
+            for (let index = 0; index < 5; index++) {
+                array.push(index + 1);
+            }
+
+            let run = fetch(array, 0, 100);
+            run.then(() => {
+                return fetch(array, 0, 200);
+            }).then(() => {
+                return fetch(array, 0, 700);
+            });
+
+        });
+    </script>
+</body>
+
+</html>

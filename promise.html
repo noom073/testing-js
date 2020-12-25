@@ -14,7 +14,7 @@
 
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             let arr = new Array('Allison',
                 'Arthur',
                 'Ana',
@@ -166,64 +166,57 @@
                 'Sachiko',
                 'Mieko',
                 'Toshie',
-                'Junko');
-            // let arr2 = arr.reverse();
+                'Junko'
+            );
+
             let div = document.getElementById("el1");
             let img = document.getElementById("img-a");
-            // let setImage = (src) => { // USER IMAGE
-            //     return new Promise((res, rej) => {
-            //         img.src = src;
-            //         img.onload = () => res(src);
-            //         img.onerror = () => rej(new Error(`Have problem: ${src}`));
-            //     });
-            // };
+            let setImage = (src) => { // USER IMAGE
+                return new Promise((res, rej) => {
+                    img.src = src;
+                    img.onload = () => res(src);
+                    img.onerror = () => rej(new Error(`Have problem: ${src}`));
+                });
+            };
             let elementFetch = (array, ms) => {
                 return new Promise((res, rej) => {
-                    setTimeout(async () => {
+                    setTimeout(async() => {
                         console.log(array);
                         let src = `https://fakeimg.pl/350x200/?text=${array}`;
-                        // let setMyImage = setImage(src); // USER IMAGE
-                        // setMyImage.then(
-                        //     src => {
-                        //         div.innerText = array;
-                        //         console.log('img complete', src);
-                        //         res();
-                        //     },
-                        //     error => console.error(error)
-                        // );
-                        div.innerText = array;
-                        res();
+                        let setMyImage = setImage(src); // USER IMAGE
+                        setMyImage.then(src => {
+                                div.innerText = array;
+                                console.log('img complete', src);
+                                res();
+                            },
+                            error => console.error(error)
+                        );
                     }, ms);
                 });
             };
-            let fet = async (array, index, ms) => {
+            let fet = async(array, index, ms) => {
                 await elementFetch(array[index], ms);
                 index++;
                 if (index < array.length) {
                     return fet(array, index, ms);
                 }
             };
-            arr = new Array(1, 2, 3, 4, 5);
-            let run = async () => {
-                fet(arr, 0, 100).then(res => {
-                    return fet(arr, 0, 250);
-                }).then(res => {
-                    return fet(arr, 0, 500);
-                }).then(res => {
-                    return fet(arr, 0, 1000);
-                });
-                // LIVE ABOVE
-                // await fet(arr, 0, 50);
-                // arr.reverse();
-                // await fet(arr, 0, 100);
-                // arr.reverse();
-                // await fet(arr, 0, 150);
-                // arr.reverse();
-                // await fet(arr, 0, 200);
-            };
-            run();
+            fet(arr, 0, 100).then(res => {
+                return fet(arr, 0, 250);
+            }).then(res => {
+                return fet(arr, 0, 500);
+            }).then(res => {
+                return fet(arr, 0, 1000);
+            });
+            // LIVE ABOVE
+            // await fet(arr, 0, 50);
+            // arr.reverse();
+            // await fet(arr, 0, 100);
+            // arr.reverse();
+            // await fet(arr, 0, 150);
+            // arr.reverse();
+            // await fet(arr, 0, 200);
         });
-
     </script>
 </body>
 
