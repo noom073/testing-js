@@ -5,16 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
+    <style>
+        #img-a {
+            border: 0;
+            margin-top: 5em;
+        }
 
-<body>
-    <div style="text-align: center;">
-        <img id="img-a" src="" width="350" height="200" alt="" style="margin-top: 5em;">
-        <h1 id="el1" style="color:crimson; font-size: 3em;"></h1>
+        #el1 {
+            font-size: 5em;
+            color: crimson;
+            font-size: 3em;
+        }
+    </style>
 
-    </div>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             let arr = new Array('Allison',
                 'Arthur',
                 'Ana',
@@ -180,21 +185,21 @@
             };
             let elementFetch = (array, ms) => {
                 return new Promise((res, rej) => {
-                    setTimeout(async() => {
+                    setTimeout(async () => {
                         console.log(array);
                         let src = `https://fakeimg.pl/350x200/?text=${array}`;
                         let setMyImage = setImage(src); // USER IMAGE
                         setMyImage.then(src => {
-                                div.innerText = array;
-                                console.log('img complete', src);
-                                res();
-                            },
+                            div.innerText = array;
+                            console.log('img complete', src);
+                            res();
+                        },
                             error => console.error(error)
                         );
                     }, ms);
                 });
             };
-            let fet = async(array, index, ms) => {
+            let fet = async (array, index, ms) => {
                 await elementFetch(array[index], ms);
                 index++;
                 if (index < array.length) {
@@ -218,6 +223,15 @@
             // await fet(arr, 0, 200);
         });
     </script>
+</head>
+
+<body>
+    <div style="text-align: center;">
+        <img id="img-a" src="" width="350" height="200" alt="">
+        <h1 id="el1"></h1>
+
+    </div>
+
 </body>
 
 </html>
