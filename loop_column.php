@@ -20,7 +20,7 @@ for ($p = 0; $p < $totalPage; $p++) {
 				if(isset($array[$index])){
 					echo $array[$index];
 					$lastIndex = $lastIndex > $index ? $lastIndex : $index;
-				}				
+				} else break 2;					
 			} else {
 				if(isset($array[$index + $e*$maxRows])){
 					echo '|' . $array[$index + $e*$maxRows];
@@ -30,7 +30,7 @@ for ($p = 0; $p < $totalPage; $p++) {
 		}
 		echo '<br>';
     }
-    $indexStart = $index-$maxRows+2;
+    $indexStart = $p*$maxRows * $columns+1
     $indexEnd = $lastIndex+1;
     echo "since {$indexStart} - {$indexEnd} <br>";
     echo '<hr>';
