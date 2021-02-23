@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: 'DotGothic16', sans-serif;
+            background-color: black;
+        }
+
+        .board {
+            background-color: black;
+            height: 5vh;
+            padding-top: 20px;
+            /* width: 50%; */
+            overflow: hidden;
+        }
+
+        .text {
+            font-size: 38px;
+            white-space: nowrap;
+            padding: auto;
+            color: chartreuse;
+            display: inline-block;
+            width: min-content;
+            padding-left: 100%;
+            animation-name: marqeer;
+            animation-timing-function: linear;
+            animation-duration: 50s;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes marqeer {
+            from {
+                transform: translate(0, 0);
+            }
+
+            to {
+                transform: translate(-100%, 0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="board">
+        <span class="text">『鬼滅の刃』』3巻の英語版です。漫画史に名を残すであろう爆発的人気を獲得した物語。魅力的なキャラクターも増えて、
+            ジャンプコミック伝統の「友情・努力・勝利」が展開。少年漫画王道の魅力が詰まっています。
+            こちらの商品は店頭併売商品につき、品切れの場合にはご注文をキャンセルとさせていただく場合がございます。ご了承ください。
+        </span>
+    </div>
+</body>
+
+</html>
