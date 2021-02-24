@@ -30,7 +30,7 @@ for ($p = 0; $p < $totalPage; $p++) {
 		}
 		echo '<br>';
     }
-    $indexStart = $p*$maxRows * $columns+1
+    $indexStart = $p*$maxRows * $columns+1;
     $indexEnd = $lastIndex+1;
     echo "since {$indexStart} - {$indexEnd} <br>";
     echo '<hr>';
